@@ -1,0 +1,32 @@
+
+<%- include("partials/header.ejs") -%>
+
+
+
+
+  <div class="IntroDiv">
+    <h1>Magic 8-Ball</h1>
+    <h3>Think carefully about a question and I will provide an answer.</h3>
+  </div>
+
+  <div class="RollButtonDiv">
+    <button class="rollButton" type="button" name="rollButton">Ask</button>
+  </div>
+
+  <div id="eightBall">
+    <div id="eightBallInnerCircle">
+      <p id="eightballText"></p>
+    </div>
+  </div>
+
+
+
+
+
+
+<%- include("partials/footer.ejs") -%>
+
+<script src="scripts/eightball.js" charset="utf-8"> </script>
+
+</body>
+</html>
