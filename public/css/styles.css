@@ -32,6 +32,7 @@ h1{
 
 h3{
   font-size: 2.5rem;
+  margin: 0.5em;
 }
 
 a{
@@ -45,7 +46,8 @@ a.menuButton:hover{
 }
 
 .rollButton{
-    padding:1% 3%;
+  margin: 0;
+    padding:0.7% 3%;
     font-size: 1rem;
 }
 
@@ -164,8 +166,8 @@ ul{
 
 
 #eightBall {
-  height:350px;
-  width:350px;
+  height:300px;
+  width:300px;
   margin: 2em auto;
   background-color:black;
   border: 5px solid rgb(34, 34, 34);

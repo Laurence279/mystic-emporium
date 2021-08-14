@@ -1,0 +1,47 @@
+
+<%- include("partials/header.ejs") -%>
+
+
+
+
+  <div class="IntroDiv">
+    <h1>The Mystic Inn</h1>
+    <h3>Welcome, welcome, have a seat.</h3>
+    <p>Pass me your hand, and I will look into your fortunes for this day.</p>
+  </div>
+
+  <div class="RollButtonDiv">
+    <form action="/inn" method="post">
+    <button class="rollButton" type="submit" name="rollButton">Predict</button>
+  </form>
+  </div>
+
+  <div>
+
+    <h4><%=moonText%></h4>
+    <h4><%=elementText%></h4>
+    <p><%=summaryText%></p>
+    <p  id= "test"><%=endText%></p>
+    <div class="RollButtonDiv">
+      <form action="/inn" method="post">
+      <button hidden id="newRollButton" class="rollButton" type="submit" name="newRoll">Yes</button>
+    </form>
+    </div>
+  </div>
+
+
+
+
+  
+
+
+<%- include("partials/footer.ejs") -%>
+
+
+</body>
+<script>
+  if (document.querySelector("#test").textContent != ""){ 
+    document.querySelector("#newRollButton").removeAttribute("hidden"); 
+    } 
+</script>
+</html>

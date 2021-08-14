@@ -1,0 +1,38 @@
+
+<%- include("partials/header.ejs") -%>
+
+
+
+
+  <div class="IntroDiv">
+    <h1>Artifacts</h1>
+    <h3>A compendium of discovered magical weapons.</h3>
+    <p>Highlighted items are particularly noted for rarity.</p>
+  </div>
+
+  <div class="RollButtonDiv">
+    <form action="/artifacts" method="post">
+    <button class="rollButton" type="submit" name="rollButton">Find</button>
+  </form>
+  </div>
+
+  <div>
+    <div>
+      <br>
+      <h3 id="itemTitle"><%=name%></h3>
+      <p id="itemDesc"><%=desc%></p>
+      <p id="itemAge" hidden><%=itemAge%></p>
+      </div>
+  </div>
+
+
+
+
+
+
+<%- include("partials/footer.ejs") -%>
+
+<script src="scripts/artifacts.js" charset="utf-8"></script>
+
+</body>
+</html>
