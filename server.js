@@ -170,23 +170,61 @@ function predictFortune()
 
 let globalDate = new Date();
 let fortune = predictFortune();
-let fortuneCheckedThisSession = false;
+function Client(fortuneCheckedThisSession, address) {
+  this.fortuneCheckedThisSession = fortuneCheckedThisSession;
+  this.address = address;
+};
+const clients = [];
+
 
 app.route("/inn*")
 .get(function(req,res){
   res.render(__dirname + "/views/inn.ejs",{moonText: "", elementText: "", summaryText: "", endText: ""});
 })
 .post(function(req,res){
-  if(req.body.hasOwnProperty("newRoll")){
-    fortuneCheckedThisSession = false;
+
+
+  // Creates a new client, storing IP address and pushes to the array if it is new. 
+  let newClient = new Client (fortuneCheckedThisSession = false, address = req.socket.remoteAddress);
+  if(clients.length === 0)
+  {
+    clients.push(newClient);
+    console.log(clients);
   }
+  else{
+    for (let i = 0; i < clients.length; i++)
+    {
+      if (newClient.address === clients[i].address)
+      {
+        console.log("match found");
+        console.log(clients);
+        newClient = clients[i];
+      }
+      else if(!newClient.address === clients[i].address)
+      {
+        console.log("no match found");
+        console.log(clients);
+      }
+      else {
+        console.log(clients);
+      }
+    }
+  }
+
+
+
+  if(req.body.hasOwnProperty("newRoll")){ //If client clicked the new roll button then give them a new fortune.
+    console.log("New Roll Requested");
+    newClient.fortuneCheckedThisSession = false;
+  }
+
   globalDate = new Date();
 
-  if(!fortuneCheckedThisSession)
+  if(!newClient.fortuneCheckedThisSession)
   {
     fortune = predictFortune();
     res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + fortune.moon.currentMoonPhase, elementText:"Today's Element: " +  fortune.element, summaryText: fortune.chance, endText: ""});
-    fortuneCheckedThisSession = true;
+    newClient.fortuneCheckedThisSession = true;
     return;
   }
   else {
