@@ -186,29 +186,22 @@ app.route("/inn*")
 
   // Creates a new client, storing IP address and pushes to the array if it is new. 
   let newClient = new Client (fortuneCheckedThisSession = false, address = req.header('x-forwarded-for') || req.socket.remoteAddress);
+  console.log("New Clients address is "+newClient.address);
   if(clients.length === 0)
   {
     clients.push(newClient);
     console.log(clients);
   }
   else{
-    for (let i = 0; i < clients.length; i++)
-    {
-      if (newClient.address === clients[i].address)
+    if(clients.indexOf(newClient.address) !== -1)
       {
-        console.log("match found");
-        console.log(clients);
-        newClient = clients[i];
+          newClient = clients.indexOf(newClient.address);
       }
-      else if(!newClient.address === clients[i].address)
+    else
       {
-        console.log("no match found");
-        console.log(clients);
+        console.log("No match found.");
+        clients.push(newClient);
       }
-      else {
-        console.log(clients);
-      }
-    }
   }
 
 
