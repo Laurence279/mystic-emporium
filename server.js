@@ -152,18 +152,33 @@ function predictFortune()
   fortuneObj.number += Math.floor(fortuneObj.moon.currentMoonPhaseNumber * 100);
   if(fortuneObj.number % 100 === 0)
   {
-    fortuneObj.chance = "Exceptionally lucky."
+    fortuneObj.chance = "Exceptionally lucky. The fates have blessed you. This is an extremely rare occasion for you, and the stars and planets have aligned into one just for you on this special day."
   }
   if (fortuneObj.number % 10 === 0)
   {
-    fortuneObj.chance = "Very Lucky";
+    fortuneObj.chance = "Very Lucky. Fortune is definitely with you this day. The stars show a good outlook for you. I can see many good things coming your way.";
   }
   else if (fortuneObj.number % 5 === 0)
   {
-    fortuneObj.chance = "Lucky";
+    fortuneObj.chance = "Lucky. There is a very good chance you will achieve the things you want. I can sense a heightened spiritual presence within you.";
   }
   else {
-    fortuneObj.chance = "Not so lucky"
+    let num = Math.ceil(Math.random()*3);
+    switch (num)
+    {
+      case 1:
+        fortuneObj.chance = "Not so lucky. The stars are not in your favour today, but do not let that distract you from concentrating on your goals.";
+        break;
+      case 2:
+        fortuneObj.chance = "I sense an average spiritual presence within you. If you try hard, there is a good chance you achieve what you want.";
+        break;
+      case 3:
+        fortuneObj.chance = "I can see a great potential in you, yet the scales of fortune are in precarious balance. This day can go both ways.";
+        break;
+    }
+
+
+
   }
   return fortuneObj;
 }
@@ -214,28 +229,32 @@ app.route("/inn*")
   if(req.body.hasOwnProperty("newRoll")){ //If client clicked the new roll button then give them a new fortune.
     console.log("New Roll Requested");
     newClient.fortuneCheckedThisSession = false;
+    
   }
 
   globalDate = new Date();
 
   if(!newClient.fortuneCheckedThisSession)
   {
+    let end = "";
+    if(req.body.hasOwnProperty("newRoll"))
+    {
+      end = "That's all I have for now. Come back tomorrow, or would you like me to do a reading for someone else?";
+    }
     newClient.fortune = predictFortune();
-    res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText:"Today's Element: " +  newClient.fortune.element, summaryText: newClient.fortune.chance, endText: ""});
+    res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText:"Your Element Today: " +  newClient.fortune.element, summaryText: newClient.fortune.chance, endText: end});
     newClient.fortuneCheckedThisSession = true;
-    return;
   }
   else {
     if(globalDate.toLocaleDateString() === newClient.fortune.moon.date.toLocaleDateString())
     {
       console.log("Last Posted Date matches todays date. No changes made.");
-      res.render(__dirname + "/views/inn.ejs",{moonText: "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText: "Today's Element: " + newClient.fortune.element, summaryText: newClient.fortune.chance, endText:"That's all I have for now. Come back tomorrow, or would you like me to do a reading for someone else?"});
-      return;
+      res.render(__dirname + "/views/inn.ejs",{moonText: "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText: "Your Element Today: " + newClient.fortune.element, summaryText: newClient.fortune.chance, endText:"That's all I have for now. Come back tomorrow, or would you like me to do a reading for someone else?"});
     }
     else{
       console.log("Last Posted Date does not match todays date. New request made.");
       newClient.fortune = predictFortune();
-      res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText:"Today's Element: " +  newClient.fortune.element, summaryText: newClient.fortune.chance, endText: ""});
+      res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText:"Your Element Today: " +  newClient.fortune.element, summaryText: newClient.fortune.chance, endText: ""});
     }
   }
 });

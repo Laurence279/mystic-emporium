@@ -5,16 +5,20 @@ html{
 body{
   box-sizing:border-box;
   min-height: 100%; 
-  font-family:cursive;
+  font-family:'EB Garamond', serif;
   text-align: center;
-  background-color: #5E454B;
-  color: #D8B384;
+  background-color: #FDE49C;
+  color: black;
   margin: 0;
   border-right: 10px solid black;
   border-left: 10px solid black;
   border-bottom: 10px solid black;
   display:flex;
   flex-direction:column;
+}
+
+p{
+  font-size: 1.5rem;
 }
 
 .footer{
@@ -27,7 +31,10 @@ body{
 }
 
 h1{
-  font-size: 6rem;
+  color: rgb(131, 12, 44);
+  font-size: 7rem;
+  font-family:'Aladin', cursive;
+  margin: 0.5em;
 }
 
 h3{
@@ -35,13 +42,19 @@ h3{
   margin: 0.5em;
 }
 
+h4{
+  font-size: 2rem;
+  margin:0.4em;
+}
+
 a{
   text-decoration: none;
-  color:inherit;
+  color:black;
+  font-family: 'Antic Slab', serif;
 }
 
 a.menuButton:hover{
-  color:silver;
+  color: rgb(218, 30, 30);
   transition: color 0.2s;
 }
 
@@ -49,7 +62,8 @@ a.menuButton:hover{
   margin: 0;
     padding:0.7% 3%;
     font-size: 1rem;
-}
+    font-family: 'Antic Slab', serif;
+  }
 
 #result{
   font-size: 1.8rem;
@@ -64,10 +78,12 @@ a.menuButton:hover{
   font-style: oblique;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align:left;
-  background-color:tomato;
+  background-color:rgb(228, 225, 185);
   padding: 1em;
-  color:black;
+
 }
+
+
 
 .menuButton{
   padding: 0.5em;
@@ -128,7 +144,8 @@ a.menuButton:hover{
 .tableDiv{
   display:none;
   padding: 1% 5%;
-
+  font-size: 2rem;
+  text-align: left;
 }
 
 .tableContainer{
@@ -136,23 +153,30 @@ a.menuButton:hover{
   display:flex;
   justify-content: center;
   font-size: 1.5rem;
-  color: salmon;
+}
+
+.tableContainer a {
+  color: rgb(131, 12, 44);
+  font-weight: bold;
 }
 
 .tableContainer table{
-  border: 2px solid black;
-  border-spacing: 0;
+
+  border-spacing: 5px;
 }
 
 .tableContainer td{
+  background-color: #f8db84;
   padding: 0.5em 1.2em;
   text-align: left;
-  border: 2px solid black;
+  border: 5px outset rgb(70, 10, 26);
+  border-top-color:rgb(126, 66, 82);
+  border-left-color:rgb(128, 99, 106);
+  box-shadow: 7px 10px 20px;
 }
 
 .tableContainer td:hover{
   background-color:aliceblue;
-  color:black;
 }
 
 .wizardContainer{
@@ -188,8 +212,15 @@ ul{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.9rem;
+
   flex-wrap: wrap;
+}
+
+#eightBallInnerCircle p {
+  font-size: 0.9rem;
+  font-family:'Verdana', 'Geneva', 'Tahoma', sans-serif;
+  max-width: 110px;
+  overflow-wrap:normal;
 }
 
 #weatherInput{
