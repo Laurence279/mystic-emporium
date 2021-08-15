@@ -169,10 +169,10 @@ function predictFortune()
 }
 
 let globalDate = new Date();
-let fortune = predictFortune();
-function Client(fortuneCheckedThisSession, address) {
+function Client(fortuneCheckedThisSession, address, fortune) {
   this.fortuneCheckedThisSession = fortuneCheckedThisSession;
   this.address = address;
+  this.fortune = fortune;
 };
 const clients = [];
 
@@ -185,26 +185,31 @@ app.route("/inn*")
 
 
   // Creates a new client, storing IP address and pushes to the array if it is new. 
-  let newClient = new Client (fortuneCheckedThisSession = false, address = req.header('x-forwarded-for') || req.socket.remoteAddress);
+  let newClient = new Client (fortuneCheckedThisSession = false, address = req.header('x-forwarded-for') || req.socket.remoteAddress, fortune = predictFortune());
   console.log("New Clients address is "+newClient.address);
   if(clients.length === 0)
   {
     clients.push(newClient);
-    console.log(clients);
   }
   else{
-    if(clients.indexOf(newClient.address) !== -1)
+    let found = false;
+    for (let i = 0; i < clients.length; i++)
+    {
+      if (newClient.address === clients[i].address)
       {
-          newClient = clients.indexOf(newClient.address);
+        console.log("match found");
+        newClient = clients[i];
+        found = true;
       }
-    else
-      {
-        console.log("No match found.");
-        clients.push(newClient);
-      }
+    }
+    if (!found)
+    {
+      clients.push(newClient);
+      console.log("Adding new client to array");
+    }
   }
 
-
+  console.log(clients);
 
   if(req.body.hasOwnProperty("newRoll")){ //If client clicked the new roll button then give them a new fortune.
     console.log("New Roll Requested");
@@ -215,22 +220,22 @@ app.route("/inn*")
 
   if(!newClient.fortuneCheckedThisSession)
   {
-    fortune = predictFortune();
-    res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + fortune.moon.currentMoonPhase, elementText:"Today's Element: " +  fortune.element, summaryText: fortune.chance, endText: ""});
+    newClient.fortune = predictFortune();
+    res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText:"Today's Element: " +  newClient.fortune.element, summaryText: newClient.fortune.chance, endText: ""});
     newClient.fortuneCheckedThisSession = true;
     return;
   }
   else {
-    if(globalDate.toLocaleDateString() === fortune.moon.date.toLocaleDateString())
+    if(globalDate.toLocaleDateString() === newClient.fortune.moon.date.toLocaleDateString())
     {
       console.log("Last Posted Date matches todays date. No changes made.");
-      res.render(__dirname + "/views/inn.ejs",{moonText: "Moon Phase: " + fortune.moon.currentMoonPhase, elementText: "Today's Element: " + fortune.element, summaryText: fortune.chance, endText:"That's all I have for now. Come back tomorrow, or would you like me to do a reading for someone else?"});
+      res.render(__dirname + "/views/inn.ejs",{moonText: "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText: "Today's Element: " + newClient.fortune.element, summaryText: newClient.fortune.chance, endText:"That's all I have for now. Come back tomorrow, or would you like me to do a reading for someone else?"});
       return;
     }
     else{
       console.log("Last Posted Date does not match todays date. New request made.");
-      fortune = predictFortune();
-      res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + fortune.moon.currentMoonPhase, elementText:"Today's Element: " +  fortune.element, summaryText: fortune.chance, endText: ""});
+      newClient.fortune = predictFortune();
+      res.render(__dirname + "/views/inn.ejs",{moonText:  "Moon Phase: " + newClient.fortune.moon.currentMoonPhase, elementText:"Today's Element: " +  newClient.fortune.element, summaryText: newClient.fortune.chance, endText: ""});
     }
   }
 });
