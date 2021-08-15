@@ -185,7 +185,7 @@ app.route("/inn*")
 
 
   // Creates a new client, storing IP address and pushes to the array if it is new. 
-  let newClient = new Client (fortuneCheckedThisSession = false, address = req.socket.remoteAddress);
+  let newClient = new Client (fortuneCheckedThisSession = false, address = req.ip);
   if(clients.length === 0)
   {
     clients.push(newClient);
