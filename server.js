@@ -185,7 +185,7 @@ app.route("/inn*")
 
 
   // Creates a new client, storing IP address and pushes to the array if it is new. 
-  let newClient = new Client (fortuneCheckedThisSession = false, address = req.header('x-forwarded-for') || req.ip, fortune = predictFortune());
+  let newClient = new Client (fortuneCheckedThisSession = false, address = (req.header('x-forwarded-for') || req.ip) + ":" + req.hostname, fortune = predictFortune());
   console.log("New Clients address is "+newClient.address);
   if(clients.length === 0)
   {
