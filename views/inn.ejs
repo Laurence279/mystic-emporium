@@ -16,12 +16,12 @@
   </form>
   </div>
 
-  <div>
+  <div class="contentDiv">
 
     <h4><%=moonText%></h4>
     <h4><%=elementText%></h4>
     <p><%=summaryText%></p>
-    <p  id= "test"><%=endText%></p>
+    <p  id= "promptText"><%=endText%></p>
     <div class="RollButtonDiv">
       <form action="/inn" method="post">
       <button hidden id="newRollButton" class="rollButton" type="submit" name="newRoll">Yes</button>
@@ -40,7 +40,7 @@
 
 </body>
 <script>
-  if (document.querySelector("#test").textContent != ""){ 
+  if (document.querySelector("#promptText").textContent != ""){ 
     document.querySelector("#newRollButton").removeAttribute("hidden"); 
     } 
 </script>

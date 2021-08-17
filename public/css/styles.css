@@ -106,18 +106,11 @@ a.menuButton:hover{
   max-height: 750px;
 }
 
-@media (max-width:640px){
-  img{
-    display:none;
-  }
-  html{
-    font-size:0.8rem;
-  }
-  .nav a{
-    font-size:0.9rem;
-  }
-}
 
+
+#promptText{
+  margin-bottom: 0;
+}
 
 .introContainer h3 {
   margin: 2% 0 1% 0;
@@ -212,7 +205,6 @@ ul{
   display: flex;
   justify-content: center;
   align-items: center;
-
   flex-wrap: wrap;
 }
 
@@ -232,6 +224,108 @@ ul{
 
 }
 
+.contentDiv{
+  margin: 0 30px;
+}
+
 .weatherResults{
   font-size: 1.4rem;
+}
+
+
+
+
+/* Tablet Landscape */
+@media screen and (max-width: 1200px) {
+  html{
+    font-size: 14px;
+    width:100%;
+    height: 100%;
+  }
+  .rollButton{
+    margin: 0;
+      padding:1.4% 6%;
+      font-size: 2rem;
+      font-family: 'Antic Slab', serif;
+    }
+    #wizardHomePage{
+      display:none;
+    }
+    .nav a{
+      font-size:0.9rem;
+    }
+    .footer p{
+      padding: 0.5%;
+    }
+}
+
+
+/* Tablet Portrait */
+@media screen and (max-width: 900px) {
+  html{
+    font-size: 18px;
+    width:100%;
+    height: 100%;
+  }
+  .rollButton{
+    margin: 0;
+      padding:1.4% 6%;
+      font-size: 2rem;
+      font-family: 'Antic Slab', serif;
+    }
+    #wizardHomePage{
+      display:none;
+    }
+    .nav a{
+      font-size:0.9rem;
+    }
+
+}
+
+/* Mobile */
+@media screen and (max-width: 800px) {
+  html {
+     font-size:10px;
+     width:100%;
+     height: 100%;
+  }
+  body{
+    border: none;
+  }
+  .rollButton{
+    margin: 0;
+      padding:1.4% 6%;
+      font-size: 2rem;
+      font-family: 'Antic Slab', serif;
+    }
+  .nav a{
+    font-size:0.9rem;
+  }
+  #wizardHomePage{
+    display:none;
+  }
+  #dice1, #dice2{
+    max-width: 30%;
+  }
+  .footer p{
+    padding: 0.5%;
+  }
+  
+  #eightBall {
+    height:200px;
+    width:200px;
+  }
+
+  #eightBallInnerCircle{
+    height:90px;
+    width:90px;
+  }
+
+  #eightBallInnerCircle p{
+    font-size: 1.1rem;
+    margin: 0 10px;
+  }
+  #newRollButton{
+    font-size: 1rem;
+  }
 }
